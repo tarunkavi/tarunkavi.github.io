@@ -1,0 +1,106 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="terminal-separator">
+      <span>--- END OF BUFFER ---</span>
+    </div>
+    <div class="footer-content">
+      <div class="copyright">
+        &copy; {currentYear} Tarun Kavipurapu
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <span class="separator">•</span>
+        <a href="https://x.com" target="_blank">X</a>
+        <span class="separator">•</span>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      </div>
+      <a href="#" class="back-to-top">^ TOP</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 6rem;
+    padding-bottom: 3rem;
+    font-family: "JetBrains Mono", monospace;
+    color: var(--color-text-secondary);
+  }
+
+  .footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem; /* Add padding to match main content mobile padding if needed */
+  }
+
+  .terminal-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    opacity: 0.5;
+  }
+
+  .terminal-separator span {
+    background: var(--color-bg-primary);
+    padding: 0 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .terminal-separator::before,
+  .terminal-separator::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .footer-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+  }
+
+  .separator {
+    opacity: 0.5;
+  }
+
+  .back-to-top {
+    margin-top: 1rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+  }
+
+  .back-to-top:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+</style>

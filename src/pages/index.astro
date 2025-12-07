@@ -1,0 +1,241 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Layout title="AstroDark Blog">
+	<section class="profile-header">
+		<div class="profile-image-container">
+			<img
+				src="https://ui-avatars.com/api/?name=The+Core+Dump&background=334155&color=fff&size=128"
+				alt="Profile"
+				class="profile-image"
+			/>
+		</div>
+		<h1 class="site-title">TheCoreDump</h1>
+		<div class="social-links">
+			<a href="https://github.com" target="_blank" aria-label="GitHub">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					><path
+						d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+					></path></svg
+				>
+			</a>
+			<a href="https://x.com" target="_blank" aria-label="X">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path
+						d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"
+					></path></svg
+				>
+			</a>
+			<a
+				href="https://linkedin.com"
+				target="_blank"
+				aria-label="LinkedIn"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					><path
+						d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+					></path><rect x="2" y="9" width="4" height="12"
+					></rect><circle cx="4" cy="4" r="2"></circle></svg
+				>
+			</a>
+		</div>
+		<p class="site-subtitle">Raw tech insights, unfiltered.</p>
+	</section>
+
+	<section class="post-list-container">
+		<ul class="post-list">
+			{
+				posts.map((post) => (
+					<li class="post-item">
+						<a href={`/blog/${post.slug}/`}>
+							<span class="post-date">
+								{post.data.pubDate.toLocaleDateString("en-US", {
+									year: "numeric",
+									month: "short",
+									day: "numeric",
+								})}
+							</span>
+							<span class="post-title">{post.data.title}</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</Layout>
+
+<style>
+	.post-list-container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem 0;
+	}
+
+	.post-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.post-item {
+		margin-bottom: 0;
+	}
+
+	.post-item a {
+		display: flex;
+		align-items: baseline;
+		gap: 2rem;
+		text-decoration: none;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		transition: all 0.2s ease;
+	}
+
+	.post-item a:hover {
+		background-color: rgba(255, 255, 255, 0.03);
+	}
+
+	.post-date {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.875rem;
+		color: var(--color-text-secondary);
+		min-width: 120px;
+	}
+
+	.post-title {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 1.125rem;
+		color: var(--color-text-primary);
+		font-weight: 500;
+	}
+
+	.post-item a:hover .post-title {
+		color: var(--color-accent);
+	}
+
+	/* Custom Bullet for "Line Item" feel */
+	.post-item a::before {
+		content: ">";
+		color: var(--color-text-secondary);
+		font-family: "JetBrains Mono", monospace;
+		font-weight: 700;
+		opacity: 0;
+		transform: translateX(-10px);
+		transition: all 0.2s ease;
+	}
+
+	.post-item a:hover::before {
+		opacity: 1;
+		transform: translateX(0);
+		color: var(--color-accent);
+	}
+
+	@media (max-width: 768px) {
+		.post-item a {
+			flex-direction: column;
+			gap: 0.5rem;
+			align-items: flex-start;
+			padding: 1rem 0.5rem;
+		}
+
+		.post-date {
+			font-size: 0.75rem;
+			min-width: auto;
+		}
+
+		.post-item a::before {
+			display: none;
+		}
+	}
+
+	.profile-header {
+		text-align: center;
+		padding: 4rem 0 2rem;
+	}
+
+	.profile-image-container {
+		margin-bottom: 1.5rem;
+	}
+
+	.profile-image {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		border: 2px solid var(--color-border);
+	}
+
+	.site-title {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 1.75rem;
+		font-weight: 700;
+		color: var(--color-text-primary);
+		margin-bottom: 1rem;
+	}
+
+	.social-links {
+		display: flex;
+		justify-content: center;
+		gap: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.social-links a {
+		color: var(--color-text-secondary);
+		transition: all 0.2s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem;
+		border: 1px solid var(--color-accent); /* Blue border */
+		border-radius: 50%; /* Optional: make it circular or rounded square */
+		width: 40px;
+		height: 40px;
+	}
+
+	.social-links a:hover {
+		color: var(--color-text-primary);
+		background-color: rgba(125, 211, 252, 0.1); /* Light blue bg on hover */
+		transform: translateY(-2px);
+		box-shadow: 0 0 10px rgba(125, 211, 252, 0.2);
+	}
+
+	.site-subtitle {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.875rem;
+		color: var(--color-text-secondary);
+		font-style: italic;
+	}
+</style>

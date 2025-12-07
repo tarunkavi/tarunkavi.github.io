@@ -1,0 +1,55 @@
+---
+
+---
+
+<header class="site-header">
+  <div class="container header-content">
+    <a href="/" class="logo">TheCoreDump</a>
+    <nav class="main-nav">
+      <a href="/" class="nav-link">Home</a>
+      <!-- Add more links here if needed in future -->
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background-color: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text-primary);
+  }
+</style>
